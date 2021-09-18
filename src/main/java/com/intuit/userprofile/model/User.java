@@ -1,8 +1,10 @@
 package com.intuit.userprofile.model;
 
+import com.intuit.userprofile.dto.ProfileRequestDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,4 +38,14 @@ public class User {
 
     // encrypted password
     String password;
+
+    public void copyUserDetails(ProfileRequestDto profileRequestDto) {
+        this.companyName = profileRequestDto.getCompanyName();
+        this.legalName = profileRequestDto.getLegalName();
+        this.email = profileRequestDto.getEmail();
+        this.website = profileRequestDto.getWebsite();
+        this.panNumber = profileRequestDto.getPanNumber();
+        this.ein = profileRequestDto.getEin();
+        this.password = new BCryptPasswordEncoder().encode(profileRequestDto.getPassword());
+    }
 }
