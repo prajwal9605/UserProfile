@@ -3,6 +3,10 @@ package com.intuit.userprofile.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import java.util.List;
+
 /**
  * @author prajwal.kulkarni on 18/09/21
  */
@@ -11,18 +15,25 @@ import lombok.Setter;
 @Setter
 public class ProfileRequestDto {
 
-    String email;
+    protected String userId;
 
-    String website;
+    @Email
+    protected String email;
 
-    String companyName;
+    protected String website;
 
-    String legalName;
+    @NotEmpty
+    protected String companyName;
 
-    String panNumber;
+    protected String legalName;
 
-    String ein;
+    @NotEmpty
+    protected String panNumber;
 
-    String password;
+    protected String ein;
+
+    protected String password;
+
+    protected List<AddressDto> addressList;
 
 }

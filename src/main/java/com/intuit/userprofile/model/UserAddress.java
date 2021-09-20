@@ -1,6 +1,8 @@
 package com.intuit.userprofile.model;
 
+import com.intuit.userprofile.dto.AddressDto;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class UserAddress {
 
     @Id
@@ -24,11 +27,11 @@ public class UserAddress {
 
     String userId;
 
-    String adressType;
+    String addressType;
 
-    String line1;
+    String line_1;
 
-    String line2;
+    String line_2;
 
     String city;
 
@@ -37,5 +40,15 @@ public class UserAddress {
     String pincode;
 
     String country;
+
+    public UserAddress(AddressDto addressDto) {
+        this.addressType = addressDto.getAddressType();
+        this.line_1 = addressDto.getLine1();
+        this.line_2 = addressDto.getLine2();
+        this.city = addressDto.getCity();
+        this.state = addressDto.getState();
+        this.pincode = addressDto.getPincode();
+        this.country = addressDto.getCountry();
+    }
 
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginResponse {
 
-    String userId;
+    private String userId;
 
-    String token;
+    private String token;
 }

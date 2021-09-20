@@ -1,8 +1,11 @@
 package com.intuit.userprofile.util;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.util.Date;
 
@@ -23,6 +26,17 @@ public class JWTUtils {
             return token;
         } catch (JWTCreationException var5) {
             return null;
+        }
+    }
+
+    public static boolean validateToken(String token, String userId) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            JWTVerifier verifier = JWT.require(algorithm).withSubject(userId).build();
+            DecodedJWT jwt = verifier.verify(token);
+            return jwt != null;
+        } catch (JWTVerificationException var6) {
+            return false;
         }
     }
 }

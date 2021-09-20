@@ -9,4 +9,7 @@ import org.springframework.http.ResponseEntity;
 public interface UserProfileService {
 
     ResponseEntity<Object> createProfile(ProfileRequestDto profileRequestDto);
+
+    ResponseEntity<Object> updateProfile(ProfileRequestDto profileRequestDto);
+
 }
