@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -45,7 +46,8 @@ public class TokenVerificationAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
 
-        if (request.getRequestURI().startsWith("/auth/login")) {
+        if (request.getRequestURI().startsWith("/auth/login")
+                || (request.getRequestURI().startsWith("/user/profile") && request.getMethod().equals(RequestMethod.POST.name()))) {
             return proceedingJoinPoint.proceed();
         } else {
             if (validateUser(request)) {
